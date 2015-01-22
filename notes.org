@@ -1,91 +1,94 @@
 * configuration de base du système
 #+begin_src sh
 
-  sudo yum upgrade
+    sudo yum upgrade
 
-  # instalation de rpm fusion
-  sudo yum install akmod-nvidia.x86_64
+    # instalation de rpm fusion
+    sudo yum install akmod-nvidia.x86_64
 
-  sudo yum install emacs -y
+    sudo yum install emacs -y
 
-  /home/michael/.config/systemd/use/emacs.service
-  ```sh
-  [unit]
-  Description=Emacs: the extensible, self-documenting text editor
+    /home/michael/.config/systemd/use/emacs.service
+    ```sh
+    [unit]
+    Description=Emacs: the extensible, self-documenting text editor
 
-  [Service]
-  Type=forking
-  ExecStart=/usr/bin/emacs --daemon
-  ExecStop=/usr/bin/emacsclient --eval "(kill-emacs)"
-  Environment=SSH_AUTH_SOCK=%t/keyring/ssh
-  Restart=always
-  WorkingDirectory=%h/.emacs.d
+    [Service]
+    Type=forking
+    ExecStart=/usr/bin/emacs --daemon
+    ExecStop=/usr/bin/emacsclient --eval "(kill-emacs)"
+    Environment=SSH_AUTH_SOCK=%t/keyring/ssh
+    Restart=always
+    WorkingDirectory=%h/.emacs.d
 
-  [Install]
-  WantedBy=multi-user.target
-  ```
-  systemctl --user start emacs
-  systemctl --user enable emacs
+    [Install]
+    WantedBy=multi-user.target
+    ```
+    systemctl --user start emacs
+    systemctl --user enable emacs
 
-  git config user.name "Michaël Faille"
-  git config --global user.email "michael@faille.io"
+    git config user.name "Michaël Faille"
+    git config --global user.email "michael@faille.io"
 
-  # La clef ssh .pub doit être dans git hub. ssh-keygen
-  cd ~/ ; git clone git@github.com:mikefaille/.emacs.d.git
+    # La clef ssh .pub doit être dans git hub. ssh-keygen
+    cd ~/ ; git clone git@github.com:mikefaille/.emacs.d.git
 
-  sudo yum install "Outils de développement et bibliothèques pour C"
-
-
-  # utile pour les traveaux d'école
-  sudo yum install http://rpm.playonlinux.com/playonlinux-yum-4-1.noarch.rpm
-
-  # fun
-  sudo yum install steam
-  sudo yum install gtk2-engines.i686
-
-  # instalation de flash
-  sudo yum install "http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm"
-  sudo yum install flash-plugin.x86_64
+    sudo yum install "Outils de développement et bibliothèques pour C"
 
 
-  # personnalisation du bureau
-  sudo yum install gnome-tweaks project-hamster
+    # utile pour les traveaux d'école
+    sudo yum install http://rpm.playonlinux.com/playonlinux-yum-4-1.noarch.rpm
 
-  # téléphone ip
-  sudo yum install https://yum.savoirfairelinux.com/sflphone/f20/RPMS/x86_64/sflphone-release-1-5.noarch.rpm
-  sudo yum install sflphone-gnome-video
+    # fun
+    sudo yum install steam
+    sudo yum install gtk2-engines.i686
 
-  # Yubikey
-  sudo wget https://raw.githubusercontent.com/Yubico/libu2f-host/master/70-u2f.rules -O /etc/udev/rules.d/70-u2f.rules
-  sudo udevadm control --reload
-  sudo udevadm trigger
+    # instalation de flash
+    sudo yum install "http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm"
+    sudo yum install flash-plugin.x86_64
 
-  sudo yum instal iotop
 
-  # agent de synchronisation pour owncloud
-  sudo yum install mirall.x86_64 mirall-nautilus.x86_64
+    # personnalisation du bureau
+    sudo yum install gnome-tweaks project-hamster
 
-  # instalation de PIP
-  sudo yum install python-pip.noarch
+    # téléphone ip
+    sudo yum install https://yum.savoirfairelinux.com/sflphone/f20/RPMS/x86_64/sflphone-release-1-5.noarch.rpm
+    sudo yum install sflphone-gnome-video
 
-  # instalation de ansible
-  sudo yum install python-devel
-  sudo pip install ansible
+    # Yubikey
+    sudo wget https://raw.githubusercontent.com/Yubico/libu2f-host/master/70-u2f.rules -O /etc/udev/rules.d/70-u2f.rules
+    sudo udevadm control --reload
+    sudo udevadm trigger
 
-  # dossier de travail de bases
-  mkdir ~/src
-  mkdir ~/docker
+    sudo yum instal iotop
 
-  sudo yum install docker
-  # sudo groupadd docker  #### docker group should exist after installing docker-io
+    # agent de synchronisation pour owncloud
+    sudo yum install mirall.x86_64 mirall-nautilus.x86_64
 
-  # add current user to docker group
-  sudo gpasswd -a ${USER} docker
+    # instalation de PIP
+    sudo yum install python-pip.noarch
 
-  # Start or restart docker (same commandline)
-  sudo service docker restart
+    # dossier de travail de bases
+    mkdir ~/src
+    mkdir ~/docker
 
-  # Pour s'ajouter dans le groupe docker sans redémarrer :
-  newgrp docker
+    # instalation de ansible
+    sudo yum install python-devel
+    sudo pip install ansible
+    cd src; git clone git@github.com:mikefaille/go-playbook.git
+    sudo ansible-playbook -i hosts site.ym
+
+
+    sudo yum install docker
+    # sudo groupadd docker  #### docker group should exist after installing docker-io
+
+    # add current user to docker group
+    sudo gpasswd -a ${USER} docker
+
+    # Start or restart docker (same commandline)
+    sudo service docker restart
+
+    # Pour s'ajouter dans le groupe docker sans redémarrer :
+    newgrp docker
 
 #+end_src
