@@ -1,4 +1,5 @@
 * configuration de base du système
+#+begin_src sh
 
 sudo yum upgrade
 
@@ -88,3 +89,5 @@ sudo service docker restart
 
 # Pour s'ajouter dans le groupe docker sans redémarrer :
 newgrp docker
+
+#+end_src
