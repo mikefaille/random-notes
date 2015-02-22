@@ -91,4 +91,19 @@
     # Pour s'ajouter dans le groupe docker sans redémarrer :
     newgrp docker
 
+curl -s https://static.rust-lang.org/rustup.sh | sudo sh
+
+cd /usr/local/src/rust/src
+
+sudo git clone https://github.com/rust-lang/rust.git
+
+echo "RUST_SRC_PATH=/usr/local/src/rust/src" | sudo dd of=/etc/profile.d/rust.sh
+
+
+cd ~/src/
+git clone https://github.com/phildawes/racer.git
+
+
+cd racer; cargo build --release
+
 #+end_src
